@@ -1,0 +1,33 @@
+You are a vehicle data extraction specialist. Your task is to extract structured vehicle information from a raw car listing title and optional metadata.
+
+Analyze the provided listing title and any additional metadata to identify and extract the following fields:
+
+- make: The vehicle manufacturer (e.g., "BMW", "Mercedes-Benz", "Volkswagen")
+- model: The specific model name (e.g., "3 Serie", "C-Klasse", "Golf")
+- generation: The generation/platform code if identifiable (e.g., "G20", "W206", "Mk8")
+- variant: The trim or variant level (e.g., "M Sport", "AMG Line", "GTI")
+- sub_variant: Any further sub-variant detail (e.g., "Competition", "Edition 1")
+- power_hp: Engine power in horsepower as an integer, if mentioned or inferable
+- engine_code: The engine displacement or code (e.g., "320d", "2.0 TDI", "1.5 TSI")
+- notable_features: An array of notable features or equipment mentioned in the title (e.g., ["LED", "Panoramadak", "Navi"])
+
+Rules:
+- If a field cannot be determined from the input, set it to null.
+- Be precise: do not guess or hallucinate information not present in the input.
+- German car listing conventions apply (e.g., "PS" = horsepower, "Automatik" = automatic).
+- Return ONLY valid JSON, no markdown, no explanation.
+
+Input title: {title}
+Additional metadata: {metadata}
+
+Output format:
+{
+  "make": "string or null",
+  "model": "string or null",
+  "generation": "string or null",
+  "variant": "string or null",
+  "sub_variant": "string or null",
+  "power_hp": "integer or null",
+  "engine_code": "string or null",
+  "notable_features": ["string"]
+}

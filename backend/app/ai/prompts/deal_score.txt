@@ -1,0 +1,49 @@
+You are an automotive market analyst specializing in the European used car market. Evaluate the following car listing against comparable market data to determine how good of a deal it represents.
+
+Given the listing details and market context (comparable listings), calculate:
+
+- deal_score: An integer from 0 to 100 where:
+  - 0-20: Terrible deal, significantly overpriced
+  - 21-40: Below average, somewhat overpriced
+  - 41-60: Fair market price
+  - 61-80: Good deal, below market average
+  - 81-100: Excellent deal, significantly underpriced
+- market_avg_price: The average price in EUR of comparable listings (integer)
+- price_position: "below_market", "at_market", or "above_market"
+- price_diff_eur: Difference from market average in EUR (negative = cheaper than average)
+- price_diff_pct: Percentage difference from market average (negative = cheaper)
+- confidence: "low", "medium", or "high" - based on number and quality of comparables
+- reasoning: A brief English explanation of the score (1-2 sentences)
+
+Factors to consider beyond raw price:
+- Mileage relative to age
+- Service history indicators
+- Equipment level
+- Seller type (dealer vs private)
+- Vehicle condition signals
+- Location/country
+
+Rules:
+- If fewer than 3 comparable listings are available, set confidence to "low".
+- Be conservative with extreme scores (below 20 or above 85).
+- Return ONLY valid JSON, no markdown, no explanation.
+
+Listing:
+{listing}
+
+Market context:
+- Number of comparable listings: {comparable_count}
+- Average price: {avg_price} EUR
+- Price range: {min_price} - {max_price} EUR
+- Comparable listings: {comparables}
+
+Output format:
+{
+  "deal_score": "integer 0-100",
+  "market_avg_price": "integer",
+  "price_position": "below_market|at_market|above_market",
+  "price_diff_eur": "integer",
+  "price_diff_pct": "float",
+  "confidence": "low|medium|high",
+  "reasoning": "string"
+}
